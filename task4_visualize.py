@@ -5,7 +5,7 @@ import os
 FILE = "data/trends_cleaned.csv"
 
 def visualize():
-    print("🚀 Starting Visualization...")
+    print("creating charts...")
 
     df = pd.read_csv(FILE)
 
@@ -13,7 +13,7 @@ def visualize():
     if not os.path.exists("data/charts"):
         os.makedirs("data/charts")
 
-
+ # Category chart
     category_counts = df["category"].value_counts()
     plt.figure()
     category_counts.plot(kind="bar")
@@ -25,7 +25,7 @@ def visualize():
     plt.savefig("data/charts/category_counts.png")
     plt.close()
 
-
+# Score chart
     top_scores = df.sort_values(by="score", ascending=False).head(10)
     plt.figure()
     plt.barh(top_scores["title"], top_scores["score"])

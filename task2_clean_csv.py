@@ -9,10 +9,10 @@ OUTPUT_FILE = "data/trends_cleaned.csv"
 
 
 def clean_data():
-    print("🚀 Starting cleaning...")
+    print("cleaning data")
 
 
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
+    with open(INPUT_FILE, "r") as f:
         data = json.load(f)
 
     cleaned_data = []
@@ -36,9 +36,9 @@ def clean_data():
 
         cleaned_data.append(cleaned_item)
 
-    print(f"✅ Cleaned {len(cleaned_data)} records")
+    print(f"Cleaned {len(cleaned_data)} data")
 
-    with open(OUTPUT_FILE, "w", newline="", encoding="utf-8") as f:
+    with open(OUTPUT_FILE, "w", newline="") as f:
         writer = csv.DictWriter(
             f,
             fieldnames=[
@@ -54,8 +54,7 @@ def clean_data():
         writer.writeheader()
         writer.writerows(cleaned_data)
 
-    print(f"📁 Saved CSV to {OUTPUT_FILE}")
-    print("🎉 Done!")
+    print(f"Saved CSV to {OUTPUT_FILE}")
 
 
 

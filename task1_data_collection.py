@@ -4,13 +4,13 @@ import json
 import os
 from datetime import datetime
 
-
+#url for hackernews 
 TOP_URL = "https://hacker-news.firebaseio.com/v0/topstories.json"
 ITEM_URL = "https://hacker-news.firebaseio.com/v0/item/{}.json"
 
 HEADERS = {"User-Agent": "TrendPulse/1.0"}
 
-
+#categories with keywords
 CATEGORIES = {
     "technology": ["ai", "software", "tech", "code", "computer", "data", "cloud", "api", "gpu", "llm"],
     "worldnews": ["war", "government", "country", "president", "election", "climate", "attack", "global"],
@@ -28,16 +28,16 @@ def get_category(title):
                 return cat
     return "other"
 
-
+# Function to get list of story IDs
 def get_story_ids():
     try:
         res = requests.get(TOP_URL, headers=HEADERS)
         return res.json()[:500]   
     except:
-        print("Failed to fetch story IDs")
+        print("Error getting IDs")
         return []
 
-
+# Function to get single story details
 def get_story(story_id):
     try:
         url = ITEM_URL.format(story_id)
@@ -48,7 +48,7 @@ def get_story(story_id):
 
 
 def main():
-    print("🚀 Starting Data Collection...")
+    print("Starting Data Collection...")
 
     story_ids = get_story_ids()
     results = []
@@ -57,7 +57,7 @@ def main():
         story = get_story(sid)
 
         if not story or "title" not in story:
-            print("⚠️ Failed story:", sid)
+            print("skipping:", sid)
             continue
 
         title = story["title"]
@@ -88,9 +88,9 @@ def main():
     with open(filename, "w") as f:
         json.dump(results, f, indent=4)
 
-    print(f"✅ Collected {len(results)} stories")
-    print(f"📁 Saved to {filename}")
-    print("🎉 Done!")
+    print(f"Collected {len(results)}")
+    print(f"Saved to {filename}")
+
 
 
 if __name__ == "__main__":
