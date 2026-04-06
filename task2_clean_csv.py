@@ -1,62 +1,58 @@
-import json
-import csv
+import pandas as pd
+import os
+
+# -------------------------------
+# Step 1: Load JSON file
+# -------------------------------
+
+file_path = "data/trends_20260406.json"   # change if your file name is different
+
+if not os.path.exists(file_path):
+    print("File not found:", file_path)
+    exit()
+
+df = pd.read_json(file_path)
+
+print(f"Loaded {len(df)} stories from {file_path}")
 
 
-INPUT_FILE = "data/trends_20260406.json"
+# -------------------------------
+# Step 2: Clean the data
+# -------------------------------
+
+# 1. Remove duplicates (same post_id)
+df = df.drop_duplicates(subset="post_id")
+print(f"After removing duplicates: {len(df)}")
+
+# 2. Remove missing important fields
+df = df.dropna(subset=["post_id", "title", "score"])
+print(f"After removing nulls: {len(df)}")
+
+# 3. Fix data types (ensure numeric)
+df["score"] = pd.to_numeric(df["score"], errors="coerce")
+df["num_comments"] = pd.to_numeric(df["num_comments"], errors="coerce")
+
+# 4. Remove low quality (score < 5)
+df = df[df["score"] >= 5]
+print(f"After removing low scores: {len(df)}")
+
+# 5. Clean title (remove extra spaces)
+df["title"] = df["title"].str.strip()
 
 
-OUTPUT_FILE = "data/trends_cleaned.csv"
+# -------------------------------
+# Step 3: Save as CSV
+# -------------------------------
+
+output_path = "data/trends_clean.csv"
+df.to_csv(output_path, index=False)
+
+print(f"Saved {len(df)} rows to {output_path}")
 
 
-def clean_data():
-    print("cleaning data")
+# -------------------------------
+# Step 4: Summary (stories per category)
+# -------------------------------
 
-
-    with open(INPUT_FILE, "r") as f:
-        data = json.load(f)
-
-    cleaned_data = []
-
-    for item in data:
-
-
-        if "title" not in item or item["title"] == "":
-            continue
-
-
-        cleaned_item = {
-            "post_id": item.get("post_id", ""),
-            "title": item.get("title", "").strip(),
-            "category": item.get("category", "other"),
-            "score": item.get("score", 0),
-            "num_comments": item.get("num_comments", 0),
-            "author": item.get("author", "unknown"),
-            "collected_at": item.get("collected_at", "")
-        }
-
-        cleaned_data.append(cleaned_item)
-
-    print(f"Cleaned {len(cleaned_data)} data")
-
-    with open(OUTPUT_FILE, "w", newline="") as f:
-        writer = csv.DictWriter(
-            f,
-            fieldnames=[
-                "post_id",
-                "title",
-                "category",
-                "score",
-                "num_comments",
-                "author",
-                "collected_at"
-            ]
-        )
-        writer.writeheader()
-        writer.writerows(cleaned_data)
-
-    print(f"Saved CSV to {OUTPUT_FILE}")
-
-
-
-if __name__ == "__main__":
-    clean_data()
+print("\nStories per category:")
+print(df["category"].value_counts())

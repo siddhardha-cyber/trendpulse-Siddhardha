@@ -8,10 +8,8 @@ post_id,title,category,score,num_comments,author,collected_at
 47663207,Show HN: I Built Paul Graham's Intellectual Captcha Idea,entertainment,7,0,nowflux,2026-04-06 22:24:35
 47663147,Launch HN: Freestyle: Sandboxes for AI Coding Agents,technology,6,1,benswerd,2026-04-06 22:24:36
 47660286,What Being Ripped Off Taught Me,other,193,121,doctorhandshake,2026-04-06 22:24:37
-47662833,Reducto releases Deep Extract,other,4,0,raunakchowdhuri,2026-04-06 22:24:38
 47655408,Show HN: I built a tiny LLM to demystify how language models work,technology,753,114,armanified,2026-04-06 22:24:39
 47651703,Microsoft hasn't had a coherent GUI strategy since Petzold,other,700,474,naves,2026-04-06 22:24:40
-47660343,PostHog (YC W20) Is Hiring,other,1,0,james_impliu,2026-04-06 22:24:40
 47656622,An open-source 240-antenna array to bounce signals off the Moon,other,212,43,hillcrestenigma,2026-04-06 22:24:41
 47652561,Gemma 4 on iPhone,other,782,220,janandonly,2026-04-06 22:24:42
 47658146,France pulls last gold held in US for $15B gain,technology,459,252,teleforce,2026-04-06 22:24:43
@@ -87,10 +85,8 @@ post_id,title,category,score,num_comments,author,collected_at
 47637757,Embarrassingly simple self-distillation improves code generation,technology,644,198,Anon84,2026-04-06 22:25:51
 47659603,Upwork Inc. violates its own DMARC and SPF policy,other,5,5,tmcdos,2026-04-06 22:25:51
 47648404,My Google Workspace account suspension,science,360,213,zenincognito,2026-04-06 22:25:52
-47660496,U.S. Lawmakers Work on Unified Site-Blocking Bill to Counter Online Piracy,other,4,0,t-3,2026-04-06 22:25:53
 47655480,Make Humans Analog Again,technology,9,0,muunbo,2026-04-06 22:25:54
 47608040,Shared mutable state in Rust (2022),other,46,7,vinhnx,2026-04-06 22:25:55
-47660349,New fibre optic data transmission speed record of 450Tbps,technology,4,0,giuliomagnifico,2026-04-06 22:25:56
 47644864,"AWS engineer reports PostgreSQL perf halved by Linux 7.0, fix may not be easy",other,397,156,crcastle,2026-04-06 22:25:57
 47598835,Rubysyn: Clarifying Ruby's Syntax and Semantics,other,72,16,petalmind,2026-04-06 22:26:00
 47616361,Google releases Gemma 4 open models,other,1799,470,jeffmcjunkin,2026-04-06 22:26:01
