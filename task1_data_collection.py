@@ -4,13 +4,13 @@ import json
 import os
 from datetime import datetime
 
-# URLs
+
 TOP_URL = "https://hacker-news.firebaseio.com/v0/topstories.json"
 ITEM_URL = "https://hacker-news.firebaseio.com/v0/item/{}.json"
 
 HEADERS = {"User-Agent": "TrendPulse/1.0"}
 
-# Categories
+
 CATEGORIES = {
     "technology": ["ai", "software", "tech", "code", "computer", "data", "cloud", "api", "gpu", "llm"],
     "worldnews": ["war", "government", "country", "president", "election", "climate", "attack", "global"],
@@ -19,7 +19,7 @@ CATEGORIES = {
     "entertainment": ["movie", "film", "music", "netflix", "game", "book", "show", "award", "streaming"]
 }
 
-# Function to assign category
+
 def get_category(title):
     title = title.lower()
     for cat, keywords in CATEGORIES.items():
@@ -28,16 +28,16 @@ def get_category(title):
                 return cat
     return "other"
 
-# Get story IDs
+
 def get_story_ids():
     try:
         res = requests.get(TOP_URL, headers=HEADERS)
-        return res.json()[:500]   # take first 500 for safety
+        return res.json()[:500]   
     except:
         print("Failed to fetch story IDs")
         return []
 
-# Get single story
+
 def get_story(story_id):
     try:
         url = ITEM_URL.format(story_id)
@@ -46,7 +46,7 @@ def get_story(story_id):
     except:
         return None
 
-# Main logic
+
 def main():
     print("🚀 Starting Data Collection...")
 
@@ -75,15 +75,15 @@ def main():
 
         results.append(data)
 
-        # Stop after 125 stories (assignment requirement)
+
         if len(results) >= 125:
             break
 
-    # Create folder
+
     if not os.path.exists("data"):
         os.makedirs("data")
 
-    # Save file
+
     filename = f"data/trends_{datetime.now().strftime('%Y%m%d')}.json"
     with open(filename, "w") as f:
         json.dump(results, f, indent=4)
@@ -92,6 +92,6 @@ def main():
     print(f"📁 Saved to {filename}")
     print("🎉 Done!")
 
-# Run
+
 if __name__ == "__main__":
     main()

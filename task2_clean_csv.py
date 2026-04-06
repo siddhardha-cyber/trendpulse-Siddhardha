@@ -1,17 +1,17 @@
 import json
 import csv
 
-# ✅ Your actual file (from screenshot)
+
 INPUT_FILE = "data/trends_20260406.json"
 
-# Output file
+
 OUTPUT_FILE = "data/trends_cleaned.csv"
 
 
 def clean_data():
     print("🚀 Starting cleaning...")
 
-    # Load JSON
+
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -19,11 +19,11 @@ def clean_data():
 
     for item in data:
 
-        # Skip if no title
+
         if "title" not in item or item["title"] == "":
             continue
 
-        # Clean each record
+
         cleaned_item = {
             "post_id": item.get("post_id", ""),
             "title": item.get("title", "").strip(),
@@ -38,7 +38,6 @@ def clean_data():
 
     print(f"✅ Cleaned {len(cleaned_data)} records")
 
-    # Save CSV
     with open(OUTPUT_FILE, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(
             f,
@@ -59,6 +58,6 @@ def clean_data():
     print("🎉 Done!")
 
 
-# Run program
+
 if __name__ == "__main__":
     clean_data()
